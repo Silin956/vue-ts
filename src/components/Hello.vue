@@ -1,0 +1,47 @@
+<template>
+    <div>
+        <div class="greeting">Hello {{name}}{{exclamationMarks}}</div>
+        <button @click="decrement">-</button>
+        <button @click="increment">+</button>
+    </div>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+    props: ['name', 'initialEnthusiasm'],
+    data() {
+        return {
+            enthusiasm: this.initialEnthusiasm,
+        }
+    },
+    mounted(){
+      for (var i = 0; i < 10; i++) {
+        (function(i) {
+        setTimeout(function() { console.log(i); }, 100 * i);
+        })(i);
+      }
+      console.log(123);
+      
+    },
+    methods: {
+        increment() { this.enthusiasm++; },
+        decrement() {
+            if (this.enthusiasm > 1) {
+                this.enthusiasm--;
+            }
+        },
+    },
+    computed: {
+        exclamationMarks(): string {
+            return Array(this.enthusiasm + 1).join('!');
+        }
+    }
+});
+</script>
+
+<style lang='css' scoped>
+.greeting {
+    font-size: 20px;
+}
+</style>
